@@ -1,6 +1,6 @@
 const { Opengram, session } = require('opengram')
 const { MediaGroup } = require('@opengram/media-group')
-const { BOT_TOKEN } = require('../config')
+const { BOT_TOKEN, isProduction, DROP_PENDING_ON_START } = require('../config')
 const { handlers } = require('../middlewares/handlers')
 const { logger } = require('./logger')
 const { stage } = require('../middlewares/stage')
@@ -76,12 +76,15 @@ async function startBot () {
 
   bot.catch(err => logger.error('Bot error:', err))
 
-  return bot.launch({
+  await bot.launch({
     polling: {
       allowedUpdates: ['callback_query', 'message', 'inline_query']
-    }
+    },
+    dropPendingUpdates: DROP_PENDING_ON_START
   })
-    .then(() => logger.info('Bot started successfully'))
+  logger.info('Bot started successfully')
+
+  return bot
 }
 
-module.exports = startBot
+module.exports = { startBot }

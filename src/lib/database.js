@@ -13,3 +13,5 @@ mongoose.connection
   .on('error', error => logger.error('MongoDB connection: error', error))
 
 mongoose.connect(MONGODB_URI)
+
+module.exports = { connection: mongoose.connection }
