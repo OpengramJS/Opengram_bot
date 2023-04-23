@@ -1,13 +1,11 @@
 const { Extra, Markup } = require('opengram')
 
 const mainKeyboard = function createMainKeyboard (ctx) {
-  return Extra.markup(m => {
-    return m.keyboard([
-      Markup.button(ctx.i18n.t('keyboard.main.createStickers')),
-      Markup.button(ctx.i18n.t('keyboard.main.back'))
-    ], { columns: 1 })
-      .resize()
-  })
+  return Markup.inlineKeyboard([
+    Markup.urlButton(ctx.i18n.t('start.buttons.gitRepo'), 'https://github.com/OpengramJS/Opengram_bot'),
+    Markup.urlButton(ctx.i18n.t('start.buttons.opengram'), 'https://github.com/OpengramJS/opengram'),
+    Markup.switchToCurrentChatButton(ctx.i18n.t('start.buttons.inline'), '')
+  ], { columns: 1 })
 }
 
 module.exports = { mainKeyboard }
