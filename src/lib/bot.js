@@ -41,7 +41,7 @@ async function startBot () {
   await i18next.init({
     lng: 'ru',
     fallbackLng: 'ru',
-    debug: true,
+    debug: !isProduction,
     resources: {
       ru: require('../../locales/ru')
     }
