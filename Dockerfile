@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 # Install app dependencies
 COPY package*.json ./
 
-RUN npm install --production
+RUN npm set-script prepare "" && npm install --production
 
 # Bundle app source
 COPY . .
