@@ -1,6 +1,7 @@
 const winston = require('winston')
 const { format, transports } = require('winston')
 const { isProduction } = require('../config')
+const path = require('path')
 
 const logger = winston.createLogger({ level: 'info' })
 
@@ -24,12 +25,12 @@ if (!isProduction) {
 } else {
   logger.add(
     new transports.File({
-      filename: 'error.log',
+      filename: path.join('logs', 'error.log'),
       level: 'error'
     })
   )
   logger.add(
-    new transports.File({ filename: 'combined.log' })
+    new transports.File({ filename: path.join('logs', 'combined.log') })
   )
 }
 
