@@ -9,6 +9,7 @@ Simple bot written with [Opengram](https://opengram.dev)
  - Media group handling example with [@opengram/media-group](https://github.com/OpengramJS/media-group)
  - Logging with [winston](https://github.com/winstonjs/winston)
  - Graceful stopping
+ - Internalization with [i18next](https://i18next.com/)
 
 ## Setup
 
@@ -35,7 +36,7 @@ NODE_ENV=production
 npm i
 ```
 
-### Running 
+### Run
 
 #### PM2
 
