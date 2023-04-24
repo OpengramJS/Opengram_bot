@@ -1,5 +1,6 @@
 const { Composer } = require('opengram')
 const { prepareResults } = require('../../lib/search')
+const { botsAPI } = require('../../enum')
 
 const botsApiPaginationAction = Composer.action(/^(?:prev|next):([0-9]+):([a-fA-F0-9]{40})$/, async ctx => {
   const [, offset, id] = ctx.match
@@ -15,7 +16,7 @@ const botsApiPaginationAction = Composer.action(/^(?:prev|next):([0-9]+):([a-fA-
     const [result] = prepareResults(
       ctx,
       [{ item: findMethod ?? findObject }],
-      isMethod ? 0 : 1,
+      isMethod ? botsAPI.METHOD : botsAPI.OBJECT,
       +offset,
       15
     )

@@ -11,28 +11,28 @@ mediaGroup.on('media_group', async ctx => {
     /** @type {Audio|PhotoSize[]|Document|Video} **/
     const media = m[type]
 
-    let description = `  <b>Номер в группе:</b> <code>${i}</code>\n`
-    description += `  <b>Тип:</b> <code>${type}</code>\n`
-    description += `  <b>Спойлер:</b> <code>${!!m.has_media_spoiler}</code>\n`
-    if (media.title !== undefined) description += `  <b>Заголовок:</b> <code>${media.title}</code>\n`
-    if (media.performer !== undefined) description += `  <b>Исполнитель:</b> <code>${media.performer}</code>\n`
-    if (m.caption !== undefined) description += `  <b>Подпись:</b> <code>${m.caption}</code>\n`
-    if (media.duration !== undefined) description += `  <b>Длительность:</b> <code>${media.duration}</code>\n`
-    if (media.width !== undefined) description += `  <b>Ширина / Высота:</b> <code>${media.width} / ${media.height}</code>`
+    let description = ctx.i18n.t('mediaGroup.info.numberInGroup', { i })
+    description += ctx.i18n.t('mediaGroup.info.numberInGroup', { type })
+    description += ctx.i18n.t('mediaGroup.info.hasSpoiler', { hasSpoiler: !!m.has_media_spoiler })
+    if (media.title !== undefined) description += ctx.i18n.t('mediaGroup.info.hasSpoiler', { title: media.title })
+    if (media.performer !== undefined) description += ctx.i18n.t('mediaGroup.info.performer', { performer: media.performer })
+    if (m.caption !== undefined) description += ctx.i18n.t('mediaGroup.info.caption', { caption: m.caption })
+    if (media.duration !== undefined) description += ctx.i18n.t('mediaGroup.info.duration', { duration: media.duration })
+    if (media.width !== undefined) description += ctx.i18n.t('mediaGroup.info.size', { width: media.width, height: media.height })
     if (type === 'photo') {
       const sizes = media.map(x => `<code>${x.width}x${x.height}</code>`)
         .join(', ')
-      description += `  <b>Ширина / Высота:</b> ${sizes}`
+      description += ctx.i18n.t('mediaGroup.info.sizes', { sizes })
     }
-    if (media.mime_type !== undefined) description += `  <b>Mime Type:</b> <code>${media.mime_type}</code>\n`
-    if (media.file_size !== undefined) description += `  <b>Размер:</b> <code>${media.file_size}</code>\n`
-    if (media.file_name !== undefined) description += `  <b>Имя файла:</b> <code>${media.file_name} Байт</code>\n`
+    if (media.mime_type !== undefined) description += ctx.i18n.t('mediaGroup.info.mimeType', { mimeType: media.mime_type })
+    if (media.file_size !== undefined) description += ctx.i18n.t('mediaGroup.info.fileSize', { fileSize: media.file_size })
+    if (media.file_name !== undefined) description += ctx.i18n.t('mediaGroup.info.fileName', { fileName: media.file_name })
 
     return description
   })
 
   await ctx.replyWithHTML(
-    `<b>Медиа-группа (${ctx.mediaGroup.length}):</b>\n` + media.join('\n\n')
+    ctx.i18n.t('mediaGroup.info.mimeType', { len: ctx.mediaGroup.length }) + media.join('\n\n')
   )
 })
 

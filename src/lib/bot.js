@@ -8,8 +8,10 @@ const { authorization } = require('../middlewares/authorization')
 const { StickerSet, User } = require('./models')
 const { i18nFactory } = require('../middlewares/i18n')
 const i18next = require('i18next')
+const i18NextFsBackend = require('i18next-fs-backend')
 const fetch = require('node-fetch')
 const { sha1 } = require('./utils')
+const path = require('path')
 
 const bot = new Opengram(BOT_TOKEN)
 
@@ -18,8 +20,8 @@ bot.context.model = {
   StickerSet
 }
 
-async function startBot () {
-  bot.context.loadBotsAPIReference = async function () {
+async function startBot(errorHandler) {
+  bot.context.loadBotsAPIReference = async function() {
     const data = await fetch('https://ark0f.github.io/tg-bot-api/custom.json')
       .then(x => x.json())
 
@@ -38,14 +40,16 @@ async function startBot () {
 
   await bot.context.loadBotsAPIReference()
 
-  await i18next.init({
-    lng: 'ru',
-    fallbackLng: 'ru',
-    debug: !isProduction,
-    resources: {
-      ru: require('../../locales/ru')
-    }
-  })
+  await i18next
+    .use(i18NextFsBackend)
+    .init({
+      lng: 'ru',
+      fallbackLng: 'ru',
+      debug: !isProduction,
+      backend: {
+        loadPath: path.resolve('locales/{{lng}}/{{ns}}.js')
+      }
+    })
 
   bot.use(
     new MediaGroup(),
@@ -74,7 +78,7 @@ async function startBot () {
     handlers
   )
 
-  bot.catch(err => logger.error('Bot error:', err))
+  bot.catch(errorHandler)
 
   await bot.launch({
     polling: {

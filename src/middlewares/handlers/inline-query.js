@@ -1,11 +1,11 @@
-const { Opengram, Composer } = require('opengram')
+const { Composer } = require('opengram')
 const { searchBotsAPI } = require('../../lib/search')
 
 function minTwoDigits (n) {
   return (n < 10 ? '0' : '') + n
 }
 
-const inlineQuery = Composer.inlineQuery(/.*/, Opengram.log(), async (ctx) => {
+const inlineQuery = Composer.inlineQuery(/.*/, async (ctx) => {
   const [query] = ctx.match
 
   if (!query) {
@@ -16,7 +16,7 @@ const inlineQuery = Composer.inlineQuery(/.*/, Opengram.log(), async (ctx) => {
     return
   }
 
-  const result = await searchBotsAPI(ctx, query)
+  const result = searchBotsAPI(ctx, query)
 
   return await ctx.answerInlineQuery(
     result,
