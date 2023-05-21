@@ -32,7 +32,7 @@
     "i18next-fs-backend": "^2.1.2",
     "markdown-to-txt": "^2.0.1",
     "mongoose": "^7.2.0",
-    "node-fetch": "^3.3.1",
+    "node-fetch": "^2.6.11",
     "opengram": "^0.3.1",
     "telegram-escape": "^1.1.1",
     "telegramify-markdown": "^1.1.0",
