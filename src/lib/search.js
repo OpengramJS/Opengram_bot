@@ -23,7 +23,7 @@ function buildArgumentsAndProps (items, offset, limit) {
 
     Array.from(tt.references).forEach(x => referencesList.add(x))
 
-    result += `\`${item.name}\`: \`${t}\` \\- ${description}`
+    result += `•   \`${item.name}\`: \`${t}\` \\- ${description}`
   }
 
   return { props: result, references: referencesList }
