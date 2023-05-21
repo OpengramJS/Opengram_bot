@@ -20,8 +20,8 @@ bot.context.model = {
   StickerSet
 }
 
-async function startBot(errorHandler) {
-  bot.context.loadBotsAPIReference = async function() {
+async function startBot (errorHandler) {
+  bot.context.loadBotsAPIReference = async function () {
     const data = await fetch('https://ark0f.github.io/tg-bot-api/custom.json')
       .then(x => x.json())
 

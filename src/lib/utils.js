@@ -24,8 +24,8 @@ const downloadFileByUrl = (fileUrl) => new Promise((resolve, reject) => {
   }).on('error', reject)
 })
 
-function notModifed (error) {
+function notModified (error) {
   if (!error.message.includes('message is not modified')) throw error
 }
 
-module.exports = { downloadFileByUrl, sha1, sleep, notModifed }
+module.exports = { downloadFileByUrl, sha1, sleep, notModified }

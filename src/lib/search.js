@@ -40,8 +40,6 @@ function buildPagination (itemsCount, id, offset, limit) {
   const pagination = []
   if (itemsCount <= limit) return pagination
 
-  console.log(id, offset, limit)
-
   if (offset) {
     pagination.push(Markup.callbackButton('«', `prev:${offset - limit}:${id}`))
   }

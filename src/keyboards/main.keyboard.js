@@ -1,4 +1,4 @@
-const { Extra, Markup } = require('opengram')
+const { Markup } = require('opengram')
 
 const mainKeyboard = function createMainKeyboard (ctx) {
   return Markup.inlineKeyboard([
