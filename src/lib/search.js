@@ -3,6 +3,7 @@ const { markdownToTxt } = require('markdown-to-txt')
 const Fuse = require('fuse.js')
 const telegramifyMarkdown = require('telegramify-markdown')
 const { T } = require('./resolveBotsAPIReferenceType')
+const { botsAPI } = require('../enum')
 
 /**
  * @param {Array} items
@@ -91,7 +92,7 @@ function prepareResults (ctx, searchResults, type, paginationOffset, paginationL
       })
     })
 
-    const messageText = ctx.i18n.t('reference.typeContent', {
+    const messageText = ctx.i18n.t('reference.' + (botsAPI.OBJECT === type ? 'typeContent' : 'methodContent'), {
       description: telegramifyMarkdown(
         item.description,
         'remove'

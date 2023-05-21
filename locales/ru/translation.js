@@ -55,7 +55,7 @@ module.exports = {
     methodContent: '*Method:* `{{ name }}`:\n\n' +
       '{{- description }}\n' +
       '*Arguments:*\n' +
-      '{{- arguments }}',
+      '{{- properties }}',
     typeContent: '*Type:* `{{ name }}`:\n\n' +
       '{{- description }}\n\n' +
       '*Properties:*\n' +
